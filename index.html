@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Name and Age Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Enter Your Details</h1>
+    <form id="detailsForm" action="https://docs.google.com/forms/d/e/1FAIpQLSd-k15fNDyuvVE1Lk_1apuDs57U9o2G2gr9zkq0HcTxmXbw1A/formResponse" method="POST" target="hidden_iframe">
+        <input type="text" name="entry.136957328" id="fullName" placeholder="Full Name" required />
+        <input type="text" name="entry.766879532" id="dob" placeholder="MM/DD/YYYY" required />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+</div>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+    document.getElementById('detailsForm').onsubmit = function() {
+        const nameInput = document.getElementById('fullName').value.trim();
+        const dobInput = document.getElementById('dob').value;
+
+        // Regular expression to validate MM/DD/YYYY format
+        const dobRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}$/;
+        
+        if (nameInput === '') {
+            alert('Please enter your full name.');
+            return false; // Prevent form submission
+        } else if (!dobRegex.test(dobInput)) {
+            alert('Please enter a valid date in MM/DD/YYYY format.');
+            return false; // Prevent form submission
+        }
+
+        // Show a message while redirecting
+        document.getElementById('message').innerText = `Thank you, ${nameInput}! Redirecting...`;
+
+        // Redirect to the specified URL after submission
+        setTimeout(() => {
+            window.location.href = 'https://branden870.github.io/Idverication/';
+        }, 3000);
+
+        return true; // Allow form submission
+    };
+</script>
+
+</body>
+</html>
+
